@@ -27,7 +27,7 @@ const Navbar = () => {
         style={{
           position: 'sticky',
           top: 0,
-          zIndex: 1,
+          zIndex: 10,
           width: '100%',
         }}
       >
@@ -37,18 +37,42 @@ const Navbar = () => {
             width: 120,
             height: 31,
             margin: '16px 24px 16px 0',
-            background: 'rgba(255, 255, 255, 0.2)',
+            background: 'rgba(255, 255, 255, 0.1)',
+            color: '#fff',
+            fontSize: 24,
+            fontWeight: 'bold'
+            
           }}
-        />
-        <Menu
+        >
+          <p style={{
+            margin: '0',
+            padding: '0',
+            lineHeight: 1.4
+          }}>ME-TODO</p>
+        </div>
+        {/* <Menu
           theme="dark"
           mode="horizontal"
           defaultSelectedKeys={['2']}
-          items={new Array(3).fill(null).map((_, index) => ({
+          items={new Array(2).fill(null).map((_, index) => ({
             key: String(index + 1),
             label: `Menu ${index + 1}`,
           }))}
-        />
+        /> */}
+        <Space direction="vertical" style={{
+          float: 'right',
+          height: 31,
+          margin: '16px 24px 16px 0',
+          background: 'rgba(255, 255, 255, 0.2)',
+        }}>
+          <Search
+            placeholder="input search text"
+            allowClear
+            enterButton="Search"
+            size="large"
+            onSearch={onSearch}
+          />
+        </Space>
 
       </Header>
       <Content
@@ -73,15 +97,7 @@ const Navbar = () => {
             background: colorBgContainer,
           }}
         >
-          <Space direction="vertical">
-            <Search
-              placeholder="input search text"
-              allowClear
-              enterButton="Search"
-              size="large"
-              onSearch={onSearch}
-            />
-          </Space>
+
           <AddNote />
           <TableNew />
         </div>
