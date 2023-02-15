@@ -1,6 +1,7 @@
 import { Breadcrumb, Input, Layout, Menu, Space, theme } from 'antd';
 import TableNew from './TableNew';
 import { AudioOutlined } from '@ant-design/icons';
+import AddNote from './AddNote';
 const { Search } = Input;
 const { Header, Content, Footer } = Layout;
 
@@ -81,6 +82,7 @@ const Navbar = () => {
               onSearch={onSearch}
             />
           </Space>
+          <AddNote />
           <TableNew />
         </div>
       </Content>
