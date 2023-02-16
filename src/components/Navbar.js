@@ -50,15 +50,7 @@ const Navbar = () => {
             lineHeight: 1.4
           }}>ME-TODO</p>
         </div>
-        {/* <Menu
-          theme="dark"
-          mode="horizontal"
-          defaultSelectedKeys={['2']}
-          items={new Array(2).fill(null).map((_, index) => ({
-            key: String(index + 1),
-            label: `Menu ${index + 1}`,
-          }))}
-        /> */}
+        
         <Space direction="vertical" style={{
           float: 'right',
           height: 31,

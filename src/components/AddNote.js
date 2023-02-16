@@ -12,8 +12,11 @@ const AddNote = () => {
     };
 
     const onFinish = e => {
-
-        console.log('Received values of form: ', e);
+        const currentTime = new Date();
+        const timeStamp = `${currentTime.getDate()}/${currentTime.getMonth() + 1}/${currentTime.getFullYear()}-${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
+        
+        const newToDo = {...e, timeStamp}
+        console.log('Received values of form: ', newToDo);
 
     }
 
@@ -34,34 +37,32 @@ const AddNote = () => {
             <h3 align='left'>Add To-Do</h3>
             <Row gutter={[16, 24]}>
                 <Col className="gutter-row" span={5}>
-                    <Form.Item label="Title">
-                        <Space>
-                            <Form.Item
-                                name="title"
-                                noStyle
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Title is required',
-                                    },
-                                ]}
-                            >
-                                <Input
-                                    style={{
-                                        width: 160,
-                                    }}
-                                    placeholder="Title"
-                                />
-                            </Form.Item>
-                        </Space>
+                    <Form.Item>
+                        <Form.Item
+                            name="title"
+                            noStyle
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Title is required',
+                                },
+                            ]}
+                        >
+                            <Input
+                                style={{
+                                    // width: 160,
+                                }}
+                                placeholder="Title"
+                            />
+                        </Form.Item>
                     </Form.Item>
                 </Col>
-                <Col className="gutter-row" span={7}>
-                    <Form.Item label="Description">
+                <Col className="gutter-row" span={6}>
+                    <Form.Item>
                         <Form.Item
                             name="description"
                             style={{
-                                width: 160
+                                // width: 160
                             }}
                             rules={[
                                 {
@@ -73,13 +74,13 @@ const AddNote = () => {
                             <TextArea
                                 rows={1}
                                 style={{
-                                    width: 160,
+                                    // width: 160,
                                 }}
                                 placeholder='Description' />
                         </Form.Item>
                     </Form.Item>
                 </Col>
-                <Col className="gutter-row" span={3}>
+                <Col className="gutter-row" span={4}>
                     <Form.Item
                         label="Due Date"
                         style={{
@@ -87,7 +88,7 @@ const AddNote = () => {
                         }}
                     >
                         <Form.Item
-                            name="Due Date"
+                            name="dueDate"
                             rules={[
                                 {
                                     required: true,
@@ -95,7 +96,6 @@ const AddNote = () => {
                             ]}
                             style={{
                                 display: 'inline-block',
-                                width: 'calc(50% - 8px)',
                             }}
                         >
                             <DatePicker placeholder='Due Date' />
@@ -103,7 +103,7 @@ const AddNote = () => {
                     </Form.Item>
                 </Col>
                 <Col className="gutter-row" span={4}>
-                    <Form.Item label="Tags">
+                    <Form.Item>
                         <Form.Item
                             name="tags"
                             noStyle
@@ -117,16 +117,17 @@ const AddNote = () => {
                             <TextArea
                                 rows={1}
                                 style={{
-                                    width: 160,
+                                    // width: 160,
                                 }}
                                 placeholder='Tags' />
                         </Form.Item>
                     </Form.Item>
                 </Col>
                 <Col className="gutter-row" span={3}>
+
                     <Form.Item label="Status">
                         <Form.Item
-                            name="Status"
+                            name="status"
                             noStyle
                             rules={[
                                 {
@@ -138,7 +139,7 @@ const AddNote = () => {
                             <Select
                                 defaultValue="Open"
                                 style={{
-                                    width: 160,
+                                    // width: 160,
                                 }}
                                 onChange={handleChange}
                                 options={[
