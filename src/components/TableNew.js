@@ -2,36 +2,24 @@ import React from 'react';
 import { Space, Table, Tag } from 'antd';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 
-
 const columns = [
   {
     title: 'Creation Time',
     dataIndex: 'createdAt',
     key: 'createdAt',
-    render: (text) => <a>{text}</a>,
-    sorter: {
-      compare: (a, b) => a.text - b.text,
-      multiple: 3,
-    },
+    sorter: (a, b) => a.createdAt.localeCompare(b.createdAt)
   },
   {
     title: 'Title',
     dataIndex: 'title',
     key: 'title',
-    render: (text) => <a>{text}</a>,
-    sorter: {
-      compare: (a, b) => a.title - b.title,
-      multiple: 3,
-    },
+    sorter: (a, b) => a.title.localeCompare(b.title)
   },
   {
     title: 'Description',
     dataIndex: 'details',
     key: 'details',
-    sorter: {
-      compare: (a, b) => a.details - b.details,
-      multiple: 3,
-    },
+    sorter: (a, b) => a.details.localeCompare(b.details)
   },
   {
     title: 'Due Date',
@@ -48,17 +36,17 @@ const columns = [
     dataIndex: 'tags',
     render: (_, { tags }) => (
       <>
-        {tags.map((tag) => {
-          let color = tag.length > 5 ? 'geekblue' : 'green';
-          if (tag === 'loser') {
-            color = 'volcano';
-          }
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
+          {tags.map((tag) => {
+            let color = tag.length > 5 ? 'geekblue' : 'green';
+            if (tag === 'loser') {
+              color = 'volcano';
+            }
+            return (
+              <Tag color={color} key={tag}>
+                {tag}
+              </Tag>
+            );
+          })}
       </>
     ),
     filters: [
@@ -104,52 +92,28 @@ const columns = [
     key: 'action',
     render: (_, record) => (
       <Space size="middle">
-        <a><EditOutlined /></a>
-        <a><DeleteOutlined /></a>
+        <a onClick={()=>handleEdit()}><EditOutlined /></a>
+        <a onClick={()=>handleDelete()}><DeleteOutlined /></a>
       </Space>
     ),
   },
 ];
 
+const handleEdit = (e) => {
+  console.log(e);
+}
+const handleDelete = (e) => {
+  console.log(e);
+}
 
-const currentTime = new Date();
-const timeStamp = `${currentTime.getDate()}/${currentTime.getMonth() + 1}/${currentTime.getFullYear()}--${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
-console.log(timeStamp);
-const data = [
-  {
-    key: '1',
-    createdAt: timeStamp,
-    title: 'Create The APP',
-    details: 32,
-    dueDate: timeStamp,
-    tags: ['nice', 'developer'],
-    status: 'Open'
-  },
-  {
-    key: '2',
-    createdAt: timeStamp,
-    title: 'Test The App',
-    details: 42,
-    dueDate: timeStamp,
-    tags: ['loser'],
-    status: 'Open'
-  },
-  {
-    key: '3',
-    createdAt: timeStamp,
-    title: 'Deploy The App',
-    details: 32,
-    dueDate: timeStamp,
-    tags: ['cool', 'teacher'],
-    status: 'Open'
-  },
-];
-
-const TableNew = () => {
+const TableNew = ({toDoValue}) => {
   return (
     <div>
       <h3 align='left'>List To-Do</h3>
-      <Table columns={columns} dataSource={data} />;
+      <Table
+        columns={columns}
+        dataSource={toDoValue}
+      />;
     </div>
   );
 };

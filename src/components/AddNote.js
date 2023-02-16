@@ -1,4 +1,4 @@
-import { DatePicker, Input, Row, Col, Select, Button, Form, Space, Tooltip, Typography } from 'antd';
+import { DatePicker, Input, Row, Col, Select, Button, Form, Space, Tooltip, Typography, Descriptions } from 'antd';
 import { FileAddOutlined } from '@ant-design/icons';
 import React from 'react';
 const { TextArea } = Input;
@@ -6,7 +6,7 @@ const style = {
     background: '#fff',
     padding: '8px 0',
 };
-const AddNote = () => {
+const AddNote = ({ toDoValue, setToDoValue }) => {
     const handleChange = (value) => {
         console.log(`selected ${value}`);
     };
@@ -14,9 +14,19 @@ const AddNote = () => {
     const onFinish = e => {
         const currentTime = new Date();
         const timeStamp = `${currentTime.getDate()}/${currentTime.getMonth() + 1}/${currentTime.getFullYear()}-${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
-        
-        const newToDo = {...e, timeStamp}
-        console.log('Received values of form: ', newToDo);
+
+        const newToDo = {
+            ...e,
+            key: currentTime,
+            details: e.description,
+            tags: [e.tags.split(',')],
+            dueDate: `${e.dueDate.$D}/${e.dueDate.$M}/${e.dueDate.$y}-${e.dueDate.$H}:${e.dueDate.$m}:${e.dueDate.$s}`,
+            createdAt: timeStamp
+        }
+        console.log('Received values of form: ', newToDo,);
+        console.log('Received old values of form: ', toDoValue);
+
+        setToDoValue([newToDo, ...toDoValue])
 
     }
 
